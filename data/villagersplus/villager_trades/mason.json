@@ -1,0 +1,48 @@
+{
+  "profession": "minecraft:mason",
+  "trades": {
+    "apprentice": [
+      {
+        "type": "villagersplus:sell_item",
+        "sell": {
+          "item": "supplementaries:ash_bricks",
+          "count": 4
+        },
+        "priceIn": {
+          "item": "emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 5
+      }
+    ],
+    "journeyman": [
+      {
+        "type": "villagersplus:sell_item",
+        "sell": {
+          "item": "meadow:limestone",
+          "count": 4
+        },
+        "priceIn": {
+          "item": "emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 10
+      },
+      {
+        "type": "villagersplus:sell_item",
+        "sell": {
+          "item": "supplementaries:daub",
+          "count": 4
+        },
+        "priceIn": {
+          "item": "emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 10
+      }
+    ]
+  }
+}
