@@ -53,7 +53,7 @@ jobs:
           version: "${{env.VERSION}}"
           version-type: "${{env.VERSION_TYPE}}"
           loaders: fabric
-          game-versions: "[${{env.MINECRAFT_VERSION}}]"
+          game-versions: "${{env.MINECRAFT_VERSION}}"
           dependencies: |
             villagersplus(required){modrinth:oHGMwNDR}
             lets-do-meadow(required){modrinth:ra7o6Sl7}
