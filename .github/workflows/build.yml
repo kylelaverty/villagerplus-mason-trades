@@ -1,0 +1,22 @@
+name: build
+
+on:
+  push:
+    branches: ["main"]
+    paths-ignore: ["**.md", "**/assets/modrinth/**"]
+  pull_request:
+    branches: ["main"]
+    paths-ignore: ["**.md", "**/assets/modrinth/**"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Check JSON
+        uses: ocular-d/json-linter@0.0.2
