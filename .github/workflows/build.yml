@@ -10,7 +10,7 @@ on:
 
 env:
   MINECRAFT_VERSION: 1.20.1
-  JAVA_VERSION: 17
+  JAVA_VERSION: 1.17
   VERSION: mc1.20.1-0.0.1-beta-fabric
   VERSION_TYPE: beta
   RELEASE_NAME: 0.0.1 (beta) for Fabric 1.20.1
@@ -35,3 +35,24 @@ jobs:
         with:
           filename: "villagerplusmasontrades-${{env.VERSION}}.zip"
           exclusions: "*.git* /*assets/* .gitignore LICENSE README.md"
+
+      # Only publish on push to main branch
+      - name: Publish Build Artifacts to GitHub Release and Modrinth
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          modrinth-id: HxZExx2V
+          modrinth-token: "${{env.MODRINTH_TOKEN}}"
+          github-token: "${{env.GITHUB_TOKEN}}"
+          github-tag: "v${{env.VERSION}}"
+          files: "villagerplusmasontrades-${{env.VERSION}}.zip"
+          name: "${{env.RELEASE_NAME}}"
+          version: "${{env.VERSION}}"
+          version-type: "${{env.VERSION_TYPE}}"
+          loaders: fabric
+          game-versions: "[${{env.MINECRAFT_VERSION}}]"
+          dependencies: |
+            villagersplus(required){modrinth:oHGMwNDR}
+            lets-do-meadow(required){modrinth:ra7o6Sl7}
+            supplementaries(required){modrinth:fFEIiSDQ}
+          java: "${{env.JAVA_VERSION}}"
