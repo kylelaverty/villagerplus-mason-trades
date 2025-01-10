@@ -33,7 +33,7 @@ jobs:
       - name: Zip Data Pack
         uses: TheDoctor0/zip-release@0.7.6
         with:
-          filename: "villagerplusmasontrades-${{env.VERSION}}.zip"
+          filename: "villagerplusmasontrades.zip"
           exclusions: "*.git* /*assets/* .gitignore LICENSE README.md"
 
       - name: List Files
@@ -47,8 +47,8 @@ jobs:
           modrinth-id: HxZExx2V
           modrinth-token: "${{env.MODRINTH_TOKEN}}"
           github-token: "${{env.GITHUB_TOKEN}}"
-          github-tag: "v${{env.VERSION}}"
-          files: "./villagerplusmasontrades-${{env.VERSION}}.zip"
+          github-tag: "${{env.VERSION}}"
+          files: "./villagerplusmasontrades.zip"
           name: "${{env.RELEASE_NAME}}"
           version: "${{env.VERSION}}"
           version-type: "${{env.VERSION_TYPE}}"
