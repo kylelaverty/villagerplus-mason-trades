@@ -45,7 +45,7 @@ jobs:
           modrinth-token: "${{env.MODRINTH_TOKEN}}"
           github-token: "${{env.GITHUB_TOKEN}}"
           github-tag: "v${{env.VERSION}}"
-          files: "villagerplusmasontrades-${{env.VERSION}}.zip"
+          files: "./villagerplusmasontrades-${{env.VERSION}}.zip"
           name: "${{env.RELEASE_NAME}}"
           version: "${{env.VERSION}}"
           version-type: "${{env.VERSION_TYPE}}"
