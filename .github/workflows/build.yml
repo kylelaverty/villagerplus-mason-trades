@@ -36,6 +36,9 @@ jobs:
           filename: "villagerplusmasontrades-${{env.VERSION}}.zip"
           exclusions: "*.git* /*assets/* .gitignore LICENSE README.md"
 
+      - name: List Files
+        run: ls -R
+
       # Only publish on push to main branch
       - name: Publish Build Artifacts to GitHub Release and Modrinth
 
