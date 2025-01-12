@@ -1,0 +1,61 @@
+name: build
+
+on:
+  push:
+    branches: ["main"]
+    paths-ignore: ["**.md", "**/assets/modrinth/**"]
+  pull_request:
+    branches: ["main"]
+    paths-ignore: ["**.md", "**/assets/modrinth/**"]
+
+env:
+  MINECRAFT_VERSION: 1.20.1
+  JAVA_VERSION: 1.17
+  VERSION: mc1.20.1-1.0.0-release-fabric
+  VERSION_TYPE: release
+  RELEASE_NAME: 1.0.0 (release) for Fabric 1.20.1
+  MODRINTH_TOKEN: ${{ secrets.PUBLISH_MODRINTH_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Check JSON
+        uses: ocular-d/json-linter@0.0.2
+
+      - name: Zip Data Pack
+        uses: TheDoctor0/zip-release@0.7.6
+        with:
+          filename: "villagerplusmasontrades-${{env.VERSION}}.zip"
+          exclusions: "*.git* /*assets/* .gitignore LICENSE README.md"
+
+      - name: List Files
+        run: ls -R
+
+      # Only publish on push to main branch
+      - name: Publish Build Artifacts to GitHub Release and Modrinth
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          modrinth-id: HxZExx2V
+          modrinth-token: "${{env.MODRINTH_TOKEN}}"
+          github-token: "${{env.GITHUB_TOKEN}}"
+          github-tag: "${{env.VERSION}}"
+          files: "./villagerplusmasontrades-${{env.VERSION}}.zip"
+          name: "${{env.RELEASE_NAME}}"
+          version: "${{env.VERSION}}"
+          version-type: "${{env.VERSION_TYPE}}"
+          loaders: datapack
+          game-versions: "${{env.MINECRAFT_VERSION}}"
+          dependencies: |
+            villagersplus(required){modrinth:oHGMwNDR}
+            lets-do-meadow(required){modrinth:ra7o6Sl7}
+            supplementaries(required){modrinth:fFEIiSDQ}
+          java: "${{env.JAVA_VERSION}}"
